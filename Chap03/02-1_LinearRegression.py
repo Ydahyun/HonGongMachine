@@ -1,6 +1,7 @@
 import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
-from sklearn.model_selection import  train_test_split
 
 perch_length = np.array([8.4, 13.7, 15.0, 16.2, 17.4, 18.0, 18.7, 19.0, 19.6, 20.0, 21.0,
        21.0, 21.0, 21.3, 22.0, 22.0, 22.0, 22.0, 22.0, 22.5, 22.5, 22.7,
@@ -15,14 +16,23 @@ perch_weight = np.array([5.9, 32.0, 40.0, 51.5, 70.0, 100.0, 78.0, 80.0, 85.0, 8
        556.0, 840.0, 685.0, 700.0, 700.0, 690.0, 900.0, 650.0, 820.0,
        850.0, 900.0, 1015.0, 820.0, 1100.0, 1000.0, 1100.0, 1000.0,
        1000.0])
-
-plt.scatter(perch_length, perch_weight)
-plt.xlabel('length')
-plt.ylabel('weight')
-plt.show()
-
+# 훈련 세트와 테스트 세트로 나눈다.
 train_input, test_input, train_target, test_target = train_test_split(perch_length, perch_weight, random_state=42)
-# 사이킷런에 사용할 휸련 세트는 2차원 배열이어야 한다.
+
+# 훈련 세트와 테스트 세트를 2차원 배열로 바꾼다.
 train_input = train_input.reshape(-1,1)
 test_input = test_input.reshape(-1,1)
-print(train_input.shape, test_input.shape)
+
+lr = LinearRegression()  # y(농어무게)=a*x(농어길이)+b
+                         # a, b를 LenearRegression 클래스가 찾아줌
+# print(lr.coef_, lr.intercept_)  a 와 b가 저장되어있음.
+lr.fit(train_input, train_target)
+print(lr.predict([[50]]))
+
+plt.scatter(train_input, train_target)
+plt.plot([15, 50], [15*lr.coef_+lr.intercept_, 50*lr.coef_+lr.intercept_])
+
+plt.scatter(50, 1241.8, marker='^')
+plt.xlabel('length')
+plt.ylabel('weignt')
+plt.show()
