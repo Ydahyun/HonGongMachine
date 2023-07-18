@@ -3,6 +3,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
+# 다항회귀 : 다항식을 사용하여 특성과 타깃 사이의 관계를 나타냄. 이 함수는 비선형일 수 있지만 여전히 선형 회귀로 표현 가능.
+
 perch_length = np.array([8.4, 13.7, 15.0, 16.2, 17.4, 18.0, 18.7, 19.0, 19.6, 20.0, 21.0,
        21.0, 21.0, 21.3, 22.0, 22.0, 22.0, 22.0, 22.0, 22.5, 22.5, 22.7,
        23.0, 23.5, 24.0, 24.0, 24.6, 25.0, 25.6, 26.5, 27.3, 27.5, 27.5,
